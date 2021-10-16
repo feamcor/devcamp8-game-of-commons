@@ -25,10 +25,10 @@ export default (orchestrator: Orchestrator<any>) =>
     // Alice creates a game code
     const codeHash = await alice.call(
         ZOME_NAME,
-        "create_game_code_anchor",
+        "create_game",
         GAME_CODE
     );
-    console.log("Alice created the game code: ", codeHash);
+    console.log("Alice created the game of code: ", codeHash);
     t.ok(codeHash);
 
     await sleep(50);
@@ -36,8 +36,8 @@ export default (orchestrator: Orchestrator<any>) =>
     // Alice joins the game with this code
     const joinHashAlice = await alice.call(
       ZOME_NAME,
-      "join_game_with_code",
-      {gamecode: GAME_CODE, nickname: "Alice"}
+      "join_game",
+      {game_code: GAME_CODE, player_nickname: "Alice"}
     )
     console.log("Alice joined the game: ", joinHashAlice);
     t.ok(joinHashAlice);
@@ -45,15 +45,15 @@ export default (orchestrator: Orchestrator<any>) =>
     // Bob joins the game with this code
     const joinHashBob = await alice.call(
       ZOME_NAME,
-      "join_game_with_code",
-      {gamecode: GAME_CODE, nickname: "Bob"}
+      "join_game",
+      {game_code: GAME_CODE, player_nickname: "Bob"}
     )
     console.log("Bob joined the game: ", joinHashBob);
     t.ok(joinHashBob);
     
     let list_of_players = await alice.call(
       ZOME_NAME,
-      "get_players_for_game_code",
+      "get_game_players",
       GAME_CODE
     );
     console.log("List of players in the game: ", list_of_players);

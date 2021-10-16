@@ -29,18 +29,18 @@ entry_defs![
 /// This function is part of our publicly exposed API and it simply wraps
 /// the corresponding function in game_code module.
 #[hdk_extern]
-pub fn create_game_code_anchor(short_unique_code: String) -> ExternResult<EntryHash> {
-    game_code::create_game_code_anchor(short_unique_code)
+pub fn create_game(game_code: String) -> ExternResult<EntryHash> {
+    game_code::create_game(game_code)
 }
 
 /// Creates a user profile and links it to the game_code
 #[hdk_extern]
-pub fn join_game_with_code(input: JoinGameInfo) -> ExternResult<EntryHash> {
-    player_profile::join_game_with_code(input)
+pub fn join_game(game_info: JoinGameInfo) -> ExternResult<EntryHash> {
+    player_profile::join_game(game_info)
 }
 
 /// Lists all players who are linked to the game_code
 #[hdk_extern]
-pub fn get_players_for_game_code(short_unique_code: String) -> ExternResult<Vec<PlayerProfile>> {
-    player_profile::get_player_profiles_for_game_code(short_unique_code)
+pub fn get_game_players(game_code: String) -> ExternResult<Vec<PlayerProfile>> {
+    player_profile::get_game_players(game_code)
 }
